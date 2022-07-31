@@ -11,6 +11,7 @@
   "author": "Shu Ding",
   "license": "MIT",
   "dependencies": {
+    "convertkit-react": "^1.5.5",
     "next": "^12.1.0",
     "nextra": "^1.1.0",
     "nextra-theme-docs": "^1.2.6",
