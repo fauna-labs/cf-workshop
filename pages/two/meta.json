@@ -1,4 +1,5 @@
 {
   "business-logic": "Business logic with AWS Lambda",
-  "lambda-functions": "Creating lambda functions"
+  "lambda-functions": "Creating lambda functions",
+  "step-functions": "AWS Step Functions"
 } 
