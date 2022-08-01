@@ -1,0 +1,75 @@
+# Interacting with Fauna from AWS Lambda functions
+
+Lambda functions are one of the main components of serverless architecture. Lambda functions are your compute layer (application layer). All business logic runs in the lambda functions. The lambda functions connect to your data layer (Fauna database in this case) for persisting and retrieving application data.
+
+This section teaches you how to connect to the Fauna database from your AWS lambda functions.
+
+## Writing the lambda code
+
+You need the Fauna driver to connect to Fauna from your Lambda functions. Install the faunadb package in your project.
+
+```bash
+$ npm i faunadb --save
+```
+
+Open the handler.js file and add the following code snippet. In the following code snippet, you first initialize the Fauna driver. Inside the handler function you create new record in the vacation collection. 
+
+```jsx
+// handler.js
+
+'use strict';
+
+// import faunadb driver
+const faunadb = require('faunadb')
+const q = faunadb.query;
+
+// initialize fauna client
+const serverClient = new faunadb.Client({ 
+  secret: process.env.FAUNA_ROOT_KEY,
+  domain: process.env.FAUNA_DOMAIN,
+});
+
+module.exports.hello = async (event) => {
+  const data = JSON.parse(event.body);
+  try {
+    const newVacation = await serverClient.query(
+      q.Create(
+        q.Collection('Vacation'),
+        { data },
+      )
+    )
+    return {
+      statusCode: 201,
+      body: JSON.stringify(newVacation)
+    }
+  } catch (error) {
+    throw new Error(error)
+  }
+};
+```
+
+Once you make these changes, make sure to deploy your application. Run `sls deploy` to deploy the latest code.
+
+Test out the deployed endpoint by making a sample Post call. 
+
+`POST [https://r1ldskjtt4.execute-api.us-east-1.amazonaws.com/book-vacation](https://r1ldskjtt4.execute-api.us-east-1.amazonaws.com/book-vacation)`
+
+```json
+// Sample Payload
+{
+    "id": "vacation-1234",
+    "userId": "test-user-1",
+    "name": "Havana ~ Cuba",
+    "hotel": "Hotel by beach",
+    "airlines": "Air Canada"
+}
+```
+
+```json
+// Sample Response
+{"ref":{"@ref":{"id":"338631962110460495","collection":{"@ref":{"id":"Vacation","collection":{"@ref":{"id":"collections"}}}}}},"ts":1659203455020000,"data":{"id":"vacation-1234","userId":"test-user-1","name":"Havana ~ Cuba","hotel":"Hotel by beach","airlines":"Air Canada"}}
+```
+
+Notice a new record inside your Vacation collection is created in your Fauna database.
+
+![Untitled](https://workshop-shadid.s3.amazonaws.com/interacting.png)
