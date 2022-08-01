@@ -1,0 +1,15 @@
+# Business logic with AWS Lambda
+
+AWS Lambda functions are the backbone of your application in an event-driven system. All the business logic happens inside lambda functions. Depending on the complexity, you may have hundreds of lambda functions in an application.
+
+For this sample application, however, we will keep things simple. We will have three lambda functions in total. They are as follows.
+
+- `bookFlight` (Books flight and updates database record)
+- `bookHotel` (Books hotel and updates database record)
+- `calcelHotel` (Cancels hotel booking if flight booking fails and updates database record.)
+
+Following is a simplified flow of the application.
+
+![Untitled](https://workshop-shadid.s3.amazonaws.com/bl.png)
+
+In the next section, we will build these lambda functions. We will orchestrate this flow in the later chapters with an AWS step function.

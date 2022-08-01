@@ -1,0 +1,207 @@
+# Creating lambda functions
+
+Create a new folder called `src/functions`. You put all your lambda function code in this folder.
+Create a new file `src/functions/bookHotel.js` and add the following code.
+
+```jsx
+// bookHotel.js
+
+'use strict';
+
+// import faunadb driver
+const faunadb = require('faunadb')
+const q = faunadb.query;
+
+// initialize fauna client
+const serverClient = new faunadb.Client({ 
+  secret: process.env.FAUNA_ROOT_KEY,
+  domain: process.env.FAUNA_DOMAIN,
+});
+
+module.exports.handler = async (event, context) => {
+
+  try {
+    const newBooking = await serverClient.query(
+      q.Create(
+        q.Collection('Vacation'),
+        { 
+          data: {
+            userId: event.userId,
+            hotelBookingId: Math.random().toString(36).substring(2,12),
+            status: 'pending',
+          }
+        },
+      )
+    );
+
+    console.log('newBooking', JSON.stringify(newBooking));
+
+    // Fake a delay for external API call
+    await new Promise(resolve => setTimeout(resolve, 4000));
+    const updateBooking = await serverClient.query(
+      q.Update(
+        q.Ref(q.Collection('Vacation'), newBooking['ref'].id),
+        { 
+          data: {
+            status: 'confirmed',
+          }
+        },
+      )
+    )
+
+    return {
+      statusCode: 200,
+      reservation: {
+        id: newBooking['ref'].id,
+        data: updateBooking.data
+      },
+      flightId: event.flightId
+    };
+  } catch (error) {
+    throw new Error(error)
+  }
+};
+```
+
+This function creates a new vacation record in the collection. There is also a fake timer to mock any external API call.
+
+Next, create a new file, `src/functions/bookFlight.js` and add the following code.
+
+```jsx
+// bookFlight.js
+'use strict';
+
+// import faunadb driver
+const faunadb = require('faunadb')
+const q = faunadb.query;
+
+// initialize fauna client
+const serverClient = new faunadb.Client({ 
+  secret: process.env.FAUNA_ROOT_KEY,
+  domain: process.env.FAUNA_DOMAIN,
+});
+
+module.exports.handler = async (event, context) => {
+  console.log('bookFlight', JSON.stringify(event, null, 2));
+
+  // Fake a delay for external API call
+  await new Promise(resolve => setTimeout(resolve, 3000));
+
+  if (event.flightId === -1) {
+    throw new Error(event.reservation.id);
+  }
+
+  try {
+    const updateBooking = await serverClient.query(
+      q.Update(
+        q.Ref(q.Collection('Vacation'), event.reservation.id),
+        { 
+          data: {
+            status: 'confirmed',
+            flightStatus: 'confirmed',
+          }
+        },
+      )
+    )
+    return {
+      updateBooking,
+      statusCode: 200
+    };
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+```
+
+Notice, that in the previous code block, when `flightId` is -1 the code throws an error. This is added to test the failed scenario. You have the option to pass the `flightId` in your event payload.
+
+Finally, create another function to cancel hotel bookings.
+
+```jsx
+// cancelHotel.js
+'use strict';
+
+// import faunadb driver
+const faunadb = require('faunadb')
+const q = faunadb.query;
+
+// initialize fauna client
+const serverClient = new faunadb.Client({ 
+  secret: process.env.FAUNA_ROOT_KEY,
+  domain: process.env.FAUNA_DOMAIN,
+});
+
+module.exports.handler = async (event, context) => {
+  // Fake a delay for external API call
+  // await new Promise(resolve => setTimeout(resolve, 10000));
+
+  try {
+    await serverClient.query(
+      q.Update(
+        q.Ref(q.Collection('Vacation'), JSON.parse(event.Cause).errorMessage),
+        { 
+          data: {
+            status: 'cancelled',
+          }
+        },
+      )
+    )
+    return { statusCode: 200 };
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+```
+
+Next, you update the `serverless.yml` file to reflect these changes. Update the file as follows.
+
+```jsx
+service: fauna-aws-workshop
+
+frameworkVersion: '2.72.3'
+
+# Specify donenv
+useDotenv: true
+
+# Add Fauna plugin
+plugins:
+  - serverless-dotenv-plugin
+  - "@fauna-labs/serverless-fauna"
+
+fauna:
+  client:
+    secret: ${env:FAUNA_ROOT_KEY}
+    domain: ${env:FAUNA_DOMAIN}
+  collections:
+    Vacation: 
+      name: Vacation
+  indexes:
+    vacations_by_userId:
+      name: vacations_by_userId
+      source: Vacation
+      terms:
+        fields:
+          - data.userId
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  httpApi:
+    cors: true
+
+functions:
+  bookHotel:
+    handler: src/functions/bookHotel.handler
+  bookFlight:
+    handler: src/functions/bookFlight.handler
+  cancelHotel:
+    handler: src/functions/cancelHotel.handler
+```
+
+Deploy the stack by running `sls deploy` command.
+
+When it finishes running the deployment script, visit your AWS console. Verify that you have three new lambda functions created from your AWS console.
+
+Notice that no API event is specified in the functions section in the `serverless.yml` file. This is intentional because we do not want to execute these lambda functions directly by calling an API endpoint. We will execute the lambda functions through AWS Step function. 
+
+In the next section we will setup a Step function to orchestrate the Lambda functions.
