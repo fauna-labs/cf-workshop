@@ -1,22 +1,16 @@
-# [Nextra](https://nextra.vercel.app)
+# Fauna Labs
 
-_Warning: this project is not production ready, API might change without notice._
+This repository contains unofficial patterns, sample code, or tools to help developers build more effectively with [Fauna][fauna]. All [Fauna Labs][fauna-labs] repositories are provided “as-is” and without support. By using this repository or its contents, you agree that this repository may never be officially supported and moved to the [Fauna organization][fauna-organization].
 
-[![](https://vercel.com/button)](https://vercel.com/import/git?s=https%3A%2F%2Fgithub.com%2Fshuding%2Fnextra&c=1)
+...
 
-**Nextra** is a [Next.js](https://nextjs.org) and [MDX](https://mdxjs.com) powered, no-code site generator.
+### Configure the connection for your Region Group
+When you created your database, you specified a Region Group.  Connections to the database need to be configured with the corresponding Region Group endpoint.  If this is a child database, the Region Group will already be set to match the parent database.  If your database is in the `Classic` region group, then the default configuration is already set.  Otherwise, configure your project for the correct Region Group as follows:
 
-![](/public/demo.png)
+- Refer to the [Region Groups](https://docs.fauna.com/fauna/current/api/fql/region_groups#how-to-use-region-groups) documentation to obtain the correct endpoint for your Region Group.
+- Reference the [Connections](https://docs.fauna.com/fauna/current/drivers/connections.html) documentation for how to correctly set the endpoint for your specific driver.
 
-## Development
+[fauna]: https://www.fauna.com/
+[fauna-labs]: https://github.com/fauna-labs
+[fauna-organization]: https://github.com/fauna
 
-The code of Nextra is under the [`core`](https://github.com/shuding/nextra/tree/core) branch.
-
-## Themes
-
-- [nextra-theme-docs](https://github.com/vercel/swr-site) ([demo](https://swr.vercel.app))
-- [nextra-theme-blog](https://github.com/shuding/site) ([demo](https://shud.in))
-
----
-
-Created by [@shuding](https://github.com/shuding) and [@pacocoursey](https://github.com/pacocoursey) at [Vercel](https://vercel.com). Released under the MIT license.
