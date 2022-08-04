@@ -1,5 +1,6 @@
 {
   "index": "Introduction",
   "one": "Chapter 1: Configuration",
-  "two": "Chapter 2: Building with Fauna + AWS"
+  "two": "Chapter 2: Building with Fauna + AWS",
+  "three": "Chapter 3: Event sourcing"
 }
