@@ -1,6 +1,6 @@
 export default {
-  github: 'https://github.com/shuding/nextra',
-  docsRepositoryBase: 'https://github.com/shuding/nextra/blob/master',
+  github: 'https://github.com/fauna-labs/aws-workshop',
+  docsRepositoryBase: 'https://github.com/fauna-labs/aws-workshop',
   titleSuffix: 'Fauna',
   logo: (
     <>
@@ -21,7 +21,7 @@ export default {
       <meta name="twitter:card" content="https://images.ctfassets.net/po4qc9xpmpuh/7itYmeRxmVGIXwwGWHrQU3/42f3e7fa7d39fab5b6222f6199f0203c/Fauna_Logo.svg" />
       <meta name="twitter:image" content="https://images.ctfassets.net/po4qc9xpmpuh/7itYmeRxmVGIXwwGWHrQU3/42f3e7fa7d39fab5b6222f6199f0203c/Fauna_Logo.svg" />
       <meta name="twitter:site:domain" content="fauna.com" />
-      <meta name="twitter:url" content="https://nextra.vercel.app" />
+      <meta name="twitter:url" content="https://fauna.com" />
       <meta name="og:title" content="Fauna-AWS Workshop" />
       <meta name="og:image" content="https://images.ctfassets.net/po4qc9xpmpuh/7itYmeRxmVGIXwwGWHrQU3/42f3e7fa7d39fab5b6222f6199f0203c/Fauna_Logo.svg" />
       <meta name="apple-mobile-web-app-title" content="Fauna-AWS Workshop" />
@@ -54,7 +54,7 @@ export default {
         sizes="16x16"
         href="https://images.ctfassets.net/po4qc9xpmpuh/7itYmeRxmVGIXwwGWHrQU3/42f3e7fa7d39fab5b6222f6199f0203c/Fauna_Logo.svg"
       />
-      <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+      <meta name="msapplication-TileImage" content="https://images.ctfassets.net/po4qc9xpmpuh/7itYmeRxmVGIXwwGWHrQU3/42f3e7fa7d39fab5b6222f6199f0203c/Fauna_Logo.svg" />
     </>
   ),
   search: true,
