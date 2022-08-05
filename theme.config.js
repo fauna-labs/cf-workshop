@@ -57,12 +57,21 @@ export default {
       <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
     </>
   ),
-  sindeBar: (
-    <>Hello</>
-  ),
   search: true,
   prevLinks: true,
   nextLinks: true,
+  feedbackLabels: "Learn More @",
+  feedbackLink: () => {
+    return (
+      <>
+        <a style={{ fontSize: '16px', color: 'rgb(58,26,182)' }} href="https://github.com/fauna-labs" target="_blank">🧪 Fauna Labs</a>
+        <br />
+        <a style={{ fontSize: '16px', color: 'rgb(58,26,182)' }} href="https://docs.fauna.com/fauna/current/" target="_blank">📗 Docs</a>
+        <br />
+        <a style={{ fontSize: '16px', color: 'rgb(58,26,182)' }} href="https://nextra.vercel.app/feedback" target="_blank">🤖 Sampe Apps</a>
+      </>
+    );
+  },
   footer: false,
   footerEditLink: '',
   footerText: <>MIT-0 {new Date().getFullYear()} © Fauna Inc.</>,
