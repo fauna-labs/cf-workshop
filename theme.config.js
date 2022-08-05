@@ -55,18 +55,6 @@ export default {
         sizes="16x16"
         href="https://images.ctfassets.net/po4qc9xpmpuh/7itYmeRxmVGIXwwGWHrQU3/42f3e7fa7d39fab5b6222f6199f0203c/Fauna_Logo.svg"
       />
-      
-      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-28QKLECV0P" />
-      <Script>
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-        
-          gtag('config', 'G-28QKLECV0P');
-        `}
-      </Script>
-
     </>
   ),
   search: true,
