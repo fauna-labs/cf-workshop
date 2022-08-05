@@ -12,9 +12,10 @@
   "license": "MIT",
   "dependencies": {
     "convertkit-react": "^1.5.5",
-    "next": "^12.1.0",
-    "nextra": "^1.1.0",
-    "nextra-theme-docs": "^1.2.6",
+    "nextra": "^2.0.0-beta.6",
+    "markdown-to-jsx": "^6.11.4",
+    "next": "^12.2.0",
+    "nextra-theme-docs": "^2.0.0-beta.6",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const btnStyle = "inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500";
+const btnStyle = "inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-700 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500";
 
 export default function EmailForm() {
   const [email, setEmail] = useState('');
@@ -14,8 +14,7 @@ export default function EmailForm() {
         value={email}
       />
       <br />
-      <button 
-        type="button" 
+      <button
         className={btnStyle}
         onClick={() => {
           setEmail('');

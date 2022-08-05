@@ -1,12 +1,12 @@
 export default {
   github: 'https://github.com/shuding/nextra',
   docsRepositoryBase: 'https://github.com/shuding/nextra/blob/master',
-  titleSuffix: ' – Nextra',
+  titleSuffix: 'Fauna',
   logo: (
     <>
       <img style={{ width: '100px' }} className="mr-2 font-extrabold hidden md:inline" src="https://images.ctfassets.net/po4qc9xpmpuh/7itYmeRxmVGIXwwGWHrQU3/42f3e7fa7d39fab5b6222f6199f0203c/Fauna_Logo.svg" alt="Nextra" />
       <span className="text-gray-600 font-normal hidden md:inline" style={{ marginTop: '10px' }}>
-        AWS Workshop
+        AWS Fauna Workshop
       </span>
     </>
   ),
@@ -57,11 +57,14 @@ export default {
       <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
     </>
   ),
+  sindeBar: (
+    <>Hello</>
+  ),
   search: true,
   prevLinks: true,
   nextLinks: true,
-  footer: true,
+  footer: false,
   footerEditLink: '',
-  footerText: <>MIT {new Date().getFullYear()} © Fauna Inc.</>,
+  footerText: <>MIT-0 {new Date().getFullYear()} © Fauna Inc.</>,
   unstable_faviconGlyph: '',
 }
