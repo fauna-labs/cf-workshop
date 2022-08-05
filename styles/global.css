@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.break-words {
+  /* color: #3A1AB6 !important; */
+}
+
+/* .active {
+  color: #3A1AB6 !important;
+} */
+
+.nextra-container .nextra-sidebar ul li.active>a, .nextra-container .nextra-sidebar ul li.active>a:hover {
+  /* color: #3A1AB6 !important; */
+}
+
+/* .nextra-container .nextra-sidebar-container {
+  background-color: #F9F9F9;
+} */
