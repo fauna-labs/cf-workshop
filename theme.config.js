@@ -72,6 +72,7 @@ export default {
   search: true,
   prevLinks: true,
   nextLinks: true,
+  unstable_flexsearch: true,
   feedbackLabels: "Learn More @",
   feedbackLink: () => {
     return (
