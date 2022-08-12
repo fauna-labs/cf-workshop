@@ -19,12 +19,12 @@ export default {
       <meta httpEquiv="Content-Language" content="en" />
       <meta name="description" content="Fauna-AWS Workshop" />
       <meta name="og:description" content="Fauna-AWS Workshop" />
-      <meta name="twitter:card" content="https://images.ctfassets.net/po4qc9xpmpuh/7itYmeRxmVGIXwwGWHrQU3/42f3e7fa7d39fab5b6222f6199f0203c/Fauna_Logo.svg" />
-      <meta name="twitter:image" content="https://images.ctfassets.net/po4qc9xpmpuh/7itYmeRxmVGIXwwGWHrQU3/42f3e7fa7d39fab5b6222f6199f0203c/Fauna_Logo.svg" />
+      <meta name="twitter:card" content="https://workshop-shadid.s3.amazonaws.com/aws-workshop-cover.png" />
+      <meta name="twitter:image" content="https://workshop-shadid.s3.amazonaws.com/aws-workshop-cover.png" />
       <meta name="twitter:site:domain" content="fauna.com" />
       <meta name="twitter:url" content="https://fauna.com" />
       <meta name="og:title" content="Fauna-AWS Workshop" />
-      <meta name="og:image" content="https://images.ctfassets.net/po4qc9xpmpuh/7itYmeRxmVGIXwwGWHrQU3/42f3e7fa7d39fab5b6222f6199f0203c/Fauna_Logo.svg" />
+      <meta name="og:image" content="https://workshop-shadid.s3.amazonaws.com/aws-workshop-cover.png" />
       <meta name="apple-mobile-web-app-title" content="Fauna-AWS Workshop" />
       <link
         rel="apple-touch-icon"
