@@ -21,6 +21,8 @@ export default {
       <meta name="og:description" content="Fauna-AWS Workshop" />
       <meta name="twitter:card" content="https://workshop-shadid.s3.amazonaws.com/aws-workshop-cover.png" />
       <meta name="twitter:image" content="https://workshop-shadid.s3.amazonaws.com/aws-workshop-cover.png" />
+      <meta name="twitter:title" content="Fauna AWS Workshop ~ Building an event driven app with AWS and Fauna" />
+      <meta name="twitter:description" content="Fauna-AWS Workshop" />
       <meta name="twitter:site:domain" content="fauna.com" />
       <meta name="twitter:url" content="https://fauna.com" />
       <meta name="og:title" content="Fauna-AWS Workshop" />
