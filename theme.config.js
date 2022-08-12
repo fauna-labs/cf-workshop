@@ -37,16 +37,16 @@ export default {
       In this workshop, you build a vacation booking application (Similar to Kayak). "/>
 
       <meta property="og:type" content="website"/>
-      <meta property="og:url" content="https://metatags.io/"/>
+      <meta property="og:url" content="https://fauna.com"/>
       <meta property="og:title" content="Fauna AWS Workshop ~ Building an event-driven app with AWS services and Fauna"/>
       <meta property="og:description" content="This hands-on guide walks you through building a real-world event-driven serverless application using AWS services (i.e., AWS Lambda, Step Functions, API Gateway) and Fauna.
 
       In this workshop, you build a vacation booking application (Similar to Kayak). "/>
       <meta property="og:image" content="https://workshop-shadid.s3.amazonaws.com/aws-workshop-cover.png"/>
 
-      
+      <meta name="twitter:site" content="@fauna" />
       <meta property="twitter:card" content="summary_large_image"/>
-      <meta property="twitter:url" content="https://metatags.io/"/>
+      <meta property="twitter:url" content="https://fauna.com"/>
       <meta property="twitter:title" content="Fauna AWS Workshop ~ Building an event-driven app with AWS services and Fauna"/>
       <meta property="twitter:description" content="This hands-on guide walks you through building a real-world event-driven serverless application using AWS services (i.e., AWS Lambda, Step Functions, API Gateway) and Fauna.
 
