@@ -1,0 +1,310 @@
+# Chapter 2: Querying Fauna from Pages Function
+
+In this chapter, you learn about various data access patterns to access data from Fauna from your Cloudflare page's functions.
+
+## Data modeling
+
+In the previous chapter, we implemented a form to create a record in the product collection.
+
+In your application you want to give the buyers the ability to leave reviews on the products they buy. Buyers can rate the product from 1 to 5 and leave a review (like Amazon).
+
+You need to create a new collection called `Reviews` and create a one-to-many relationship between `Products` and `Reviews`
+
+[![](https://mermaid.ink/img/pako:eNo1jsEKwjAMhl-l5Ly9QM96F70WJDSZK9hWslQZ3d7dSt13Sv7_I6SCz8RggeUU8CEYXTKNi2QqXs22jWOu5srvwJ_FWDPjco-Y1q4dwACRJWKgdqr-Ogc6c2QHto3EE5anOnBpb2p5ESqfKWgWsCqFB8Ci-bYmf-zd-f_Uw_0Lzlk5Gw?type=png)](https://mermaid.live/edit#pako:eNo1jsEKwjAMhl-l5Ly9QM96F70WJDSZK9hWslQZ3d7dSt13Sv7_I6SCz8RggeUU8CEYXTKNi2QqXs22jWOu5srvwJ_FWDPjco-Y1q4dwACRJWKgdqr-Ogc6c2QHto3EE5anOnBpb2p5ESqfKWgWsCqFB8Ci-bYmf-zd-f_Uw_0Lzlk5Gw)
+
+Head to Fauna dashboard and create a new collection called `Reviews` in your database.
+
+## Create Product page
+
+Update your `pages/index.js` file to have a link to `/products/:id` route.
+
+```jsx
+// partials of pages/index.js
+import Link from 'next/link';
+
+//...
+
+export default function Home({ products, fauna_secret }) {
+  return (
+    <div className={styles.container}>
+      <h1>Products</h1>
+      <ul>
+      {
+        products.map((product) => (
+          <li key={product._id}>
+            ...
+            **<Link href={`/products/${product._id}`}>
+              <a>View Product</a>
+            </Link>**
+          </li>
+        ))
+      }
+      </ul>
+    </div>
+  )
+}
+```
+
+Next, create a new page `pages/products/[id].js` and add the following code.
+
+When you select the `View Product` button, it now takes you to this product page.
+
+```jsx
+// pages/products/[id].js
+import { getProductById } from '../../db';
+
+export const config = {
+  runtime: 'experimental-edge',
+}
+
+export async function getServerSideProps(context) {
+  const { id } = context.query;
+  const product = await getProductById(id);
+  return {
+    props: { product: {
+      ...product,
+      _id: id
+    } },
+  }
+}
+
+export default function ProductPage({ product }) {
+	const submitReview = (e) => {
+	  e.preventDefault();
+	  console.log('submit review');
+	}
+	  return (
+    <div>
+      <h1>{product.title}</h1>
+      <p>{product.description}</p>
+      <p>{product.price}</p>
+
+      <h3>Add your review</h3>
+      <form onSubmit={submitReview}>
+        <input type="text" name="name" placeholder="Your name" />
+        <br />
+        <br />
+        <textarea name="review" placeholder="Your review" />
+        <br />
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+  )
+}
+```
+
+Go to your `db.js` file and add a new function to query a product by its `id`.
+
+```jsx
+// db.js
+// ... rest of the file
+export const getProductById = async (id) => {
+  const response = await client.query(
+    q.Get(q.Ref(q.Collection('Products'), id))
+  );
+  return response.data;
+}
+```
+
+Review the code for `pages/products/[id].js.` Notice that you have a submit review form on this page. However, on form submission, this form doesn't do anything yet. Let's go ahead and change that. You will make a post request to `/api/add-review` on the form submission.
+
+Update your `pages/products/[id].js` file as follows.
+
+```jsx
+// pages/products/[id].js
+import { getProductById } from '../../db';
+import { useState } from 'react';
+
+export const config = {
+  runtime: 'experimental-edge',
+}
+
+export async function getServerSideProps(context) {
+  const { id } = context.query;
+  const product = await getProductById(id);
+  return {
+    props: { product: {
+      ...product,
+      _id: id
+    } },
+  }
+}
+
+export default function ProductPage({ product }) {
+  const [state, setState] = useState({
+    name: '',
+    review: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setState({ ...state, [name]: value });
+  }
+  
+  const submitReview = async (e) => {
+    e.preventDefault();
+    // Make a API call to create a review
+    try {
+      const response = await fetch('/api/create-review', {
+        method: 'POST',
+        body: JSON.stringify({
+          ...state,
+          productId: product._id,
+        }),
+      });
+      if(response.status === 200) {
+        alert('Review created successfully');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  return (
+    <div>
+      <h1>{product.title}</h1>
+      <p>{product.description}</p>
+      <p>{product.price}</p>
+
+      <h3>Add your review</h3>
+      <form onSubmit={submitReview}>
+        <input type="text" name="name" placeholder="Your name" onChange={handleChange}/>
+        <br />
+        <br />
+        <textarea name="review" placeholder="Your review" onChange={handleChange}/>
+        <br />
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+  )
+}
+```
+
+Create a new API route to handle the create review request. Make a new file `pages/api/create-review.js` and add the following code.
+
+```jsx
+import { createReview } from '../../db'
+import { readRequestBodyStream } from './products';
+
+export const config = {
+  runtime: 'experimental-edge',
+}
+
+export default async function (req) {
+  if(req.method === 'POST') {
+    const body = await readRequestBodyStream(req.body);
+    const { name, review, productId } = JSON.parse(body);
+    const newReview = await createReview(name, review, productId);
+    return new Response(
+      JSON.stringify({ 
+        message: 'Review created successfully',
+        newReview,
+      }),
+      {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+  }
+}
+```
+
+Finally, create a new function called `createReview` in your `db.js` file to handle the insertion of new reviews in your database.
+
+```jsx
+// db.js
+
+// ....
+export const createReview = async (name, review, productId) => {
+  const response = await client.query(
+    q.Create(q.Collection('Reviews'), {
+      data: {
+        name,
+        review,
+        product: q.Ref(q.Collection('Products'), productId)
+      },
+    })
+  );
+  return response.data;
+}
+```
+
+Now on form submit a new review is created.
+
+## Querying all reviews that belong to a Product
+
+Next, let's figure out how you can query all the reviews that belong to a Product. When querying for a product, you can get all the associated reviews for that product. To do this, first, create a new index in Fauna.
+
+![Create New Index](https://workshop-shadid.s3.amazonaws.com/cf-workshop/reviews_collection.png)
+
+In Fauna dashboard, select *Indexes* and *New Index.* 
+Select the `Reviews` collection as the source. Name your index `reviews_by_product`. Add a term `data.product`
+
+Next make the following changes to your `getProductById` function inside `db.js` file.
+
+```jsx
+export const getProductById = async (id) => {
+  const response = await client.query(
+    q.Let(
+      {
+        productRef: q.Get(q.Ref(q.Collection("Products"), id)),
+        reviewsRef: q.Map(
+         q.Paginate(
+           q.Match(
+            q.Index('reviews_by_product'),
+            q.Ref(q.Collection("Products"), id)
+           )
+         ),
+         q.Lambda(x => q.Get(x))
+        )
+      },
+      {
+        product: q.Var("productRef"),
+        reviews: q.Var("reviewsRef")
+      }
+    )
+  );
+  const reviews = response.reviews.data.map((review) => ({ 
+    name: review.data.name, 
+    review: review.data.review, 
+    _id: review.ref.id 
+  }));
+  return {
+    ...response.product.data,
+    reviews,
+  };
+}
+```
+
+In your `pages/products/[id].js` file add the following changes to render the reviews for the product.
+
+```jsx
+// ... rest of the file
+return (
+    <div>
+      <h1>{product.title}</h1>
+      <p>{product.description}</p>
+      <p>{product.price}</p>
+
+      <h3>Add your review</h3>
+      <form onSubmit={submitReview}>
+        <input type="text" name="name" placeholder="Your name" onChange={handleChange}/>
+        <br />
+        <br />
+        <textarea name="review" placeholder="Your review" onChange={handleChange}/>
+        <br />
+        <input type="submit" value="Submit" />
+      </form>
+      **{
+        product.reviews.map((review) => (
+          <div key={review._id}>
+            <h4>{review.name} :</h4>
+            <p>{review.review}</p>
+          </div>
+        ))
+      }**
+    </div>
+  )
+```

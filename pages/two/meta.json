@@ -1,4 +1,3 @@
 {
-  "business-logic": "Business logic with AWS Lambda",
-  "lambda-functions": "Creating lambda functions"
+  "query-fauna-pages-func": "Query Fauna database from Cloudflare Pages Function"
 } 
