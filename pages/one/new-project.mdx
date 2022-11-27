@@ -1,0 +1,89 @@
+# Create a new Project
+
+Create a new Next.js project by running the following command. 
+
+```sh
+$ npx create-next-app <your-app-name>
+```
+
+> 💡 Info: When you create API routes in your Next.js application (i.e. under `/pages/api` folder) and deploy them to Cloudflare each of these functions become individual Cloudflare Workers function on the Edge.* 
+
+
+## Configure the project to use the Edge Runtime
+
+Next, enable edge-runtime for your API routes. Open the `pages/api/hello.js` file. This is an API route. When deployed this API route will become an edge function, however for this to work you have the add the following code. 
+
+```jsx
+// pages/api/hello.js
+
+export const config = {
+  runtime: 'experimental-edge',
+}
+
+export default async function (req) {
+  return new Response(
+    JSON.stringify({ name: 'John Doe' }),
+    {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+  )
+}
+```
+
+To learn more about how Edge Runtime works refer to Next.js' [Edge API Routes documentation](https://nextjs.org/docs/api-routes/edge-api-routes). 
+
+Run the following command in the root of your project to locally build your application. 
+
+```bash
+$ npx @cloudflare/next-on-pages --experimental-minify
+```
+
+You will notice the following output for a successful build.
+
+![Build output](https://workshop-shadid.s3.amazonaws.com/cf-workshop/build-output.png)
+
+Notice that a folder named `.vercel/output` is generated. Inside you can find the generated Clourflare Workers and Pages functions.
+
+
+## Create a GitHub repository
+
+Next, create a new GitHub repository by visiting [repo.new](https://repo.new/). When you are done creating a new repository, prepare and push your local application to GitHub by running the following commands in your terminal:
+
+```
+$ git remote add origin <YOUR_GITHUB_REPO_URL>
+$ git branch -M main
+$ git push -u origin main
+
+```
+
+## Deploy with Cloudflare Pages
+
+If you haven’t already signed up for a free Cloudflare Pages account, [create an account now](https://dash.cloudflare.com/pages).
+
+1. Log in to the [Cloudflare dashboard](https://dash.cloudflare.com/).
+1. In **Account Home**, select **Pages** > **Create a project**.
+1. In the build settings select `Next.js` you can leave everything else as default.
+
+
+![Configure deployment](https://workshop-shadid.s3.amazonaws.com/cf-workshop/configure-build.png)
+
+4. In the environment variable section add a new variable called `NODE_VERSION` and add the node version of your project. **You require a node version 14 or greater.**
+
+![Define Node Version in cloud flare configuration](https://workshop-shadid.s3.amazonaws.com/cf-workshop/node_version.png)
+
+5. Next, go to **Settings > Functions** and under compatibility flags add the following flags.
+
+`streams_enable_constructors`, `transformstream_enable_standard_constructor`. 
+
+![adding compatibility flags](https://workshop-shadid.s3.amazonaws.com/cf-workshop/compatibility.png)
+
+*These flags are scheduled to graduate on the 2022-11-30 compatibility date and should no longer be necessary to manually add after November 30, 2022.*
+
+1. Select Save and Deploy
+
+Visit the deployed site url to make sure everything is working as expected.
+
+Next, visit [`https://<your-domain-name>/api/hello`](https://with-cloudflare-nextjs.pages.dev/api/hello) to make sure that the Pages function is working as expected. 

@@ -1,33 +1,19 @@
-import EmailForm from '../components/EmailForm';
-import GA from '../components/GA';
+# Build a globally distributed full-stack app using Cloudflare Pages, Next.js and Fauna
 
-<GA />
 
-# Introduction
+In this tutorial, you will build a globally distributed full stack application using Cloudflare Pages (for the front end), Pages Functions (the backend), and Fauna as the database. You will use the Next.js  framework to tie all these services together in a cohesive and scalable codebase.
 
-This hands-on guide walks you through building a real-world event-driven serverless application using AWS services (i.e., AWS Lambda, Step Functions, API Gateway) and Fauna.
-
-In this workshop, you build a vacation booking application (Similar to [Kayak](kayak.com) or [Redtag](https://www.redtag.ca/) deals).  You learn about the following topics:
-
-- AWS Lambda
-- Basics of Fauna
-- Step functions
-- Real-time updates with Fauna Streams
-
-Find the complete code for this workshop at the [following link](https://github.com/Shadid12/aws-workshop-demo-fauna).
-
-This workshop uses the [serverless framework](https://www.serverless.com/) as ***infrastructure as code.*** 
-
-If you would like to get updates on Fauna workshops, feel free to subscribe to our email list. 
-
-<EmailForm />
 
 ### Workshop Prerequisites:
 
-- Node installed (version 14.x or higher, find [instructions here](https://nodejs.org/en/download/))
-- awscli installed (find [install instructions here](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html))
-- AWS Account
-- Fauna Account
-- Some familiarity with AWS Lambda and Fauna
-- Some familiarity with Infrastructure as Code
+- A recent version of [Node and NPM](https://docs.npmjs.com/getting-started) on your computer
+- A [Fauna](https://fauna.com/) account
+- A [Cloudflare](https://www.cloudflare.com/) account
+- Some familiarity with Next.js
+
+## What is a globally distributed app?
+
+Before you continue, let’s explore what a globally distributed app is and why you might want to build one. A globally distributed app always runs closest to the end user, thus making the application response time extremely fast.
+
+Cloudflare [Pages](https://developers.cloudflare.com/pages/) and Pages Functions run your code closest to the end user’s geographical location without you maintaining a server. While Fauna being a globally distributed database system, ensures that data reads and writes always happen on the closest replicas of your database. Thus this combination of Cloudflare Workers, Pages, and Fauna allows you to build highly performant apps with very low latency. 
 

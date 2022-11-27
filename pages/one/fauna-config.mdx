@@ -1,0 +1,36 @@
+# Configure Fauna database
+
+1. Head over to [Fauna](https://dashboard.fauna.com/) and create an account if you haven’t done so already. 
+2. Next, create a new database. Give your database a name. Select the *classic region group* and select *create*.
+
+Info:  *By default, Fauna allows you to save your data globally closer to your user. However, you can also limit your data's distribution to a specific geographic region group to comply with GDPR and data residency. Learn more about region groups [here](https://docs.fauna.com/fauna/current/learn/understanding/region_groups).*
+
+*You also have the option to save data into privately distributed nodes with [Virtual Private Fauna.](https://www.globenewswire.com/news-release/2022/11/17/2558259/0/en/Fauna-Launches-Virtual-Private-Offering-of-its-Serverless-Database-for-the-Most-Demanding-Enterprise-Applications.html)*
+
+![Create a database](https://workshop-shadid.s3.amazonaws.com/cf-workshop/create_database.png)
+
+3. Next, select *create new collection*. 
+
+![Create a new collection](https://workshop-shadid.s3.amazonaws.com/cf-workshop/new_collection.png)
+
+4. Create a new Collection called `Products`.
+
+![Create a new Collection called Products](https://workshop-shadid.s3.amazonaws.com/cf-workshop/new_prod_collection.png)
+
+5. You would require a secret to query your database from your application. Navigate to *Security > Keys* and select *New Key*.
+
+![New Key](https://workshop-shadid.s3.amazonaws.com/cf-workshop/new_key.png)
+
+6. Select `Server` Role from the dropdown. Give your key a name and select *Save*. When the key is generated save it into a secure file.
+
+![New Key Role](https://workshop-shadid.s3.amazonaws.com/cf-workshop/new_key_conf.png)
+
+7. For local development create a new file called `.env` in the root of your project and add the following code. Make sure you add `.env` to your git ignore file so it doesn’t get committed.
+
+```bash
+FAUNA_SECRET=fnAExxxx
+```
+
+8. Finally, head back to Cloudflare Pages settings and add a new environment variable called FAUNA_SECRET. 
+
+![Fauna Secret](https://workshop-shadid.s3.amazonaws.com/cf-workshop/fauna_secret.png)

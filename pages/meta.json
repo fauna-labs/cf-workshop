@@ -1,6 +1,5 @@
 {
   "index": "Introduction",
-  "one": "Chapter 1: Configuration",
-  "two": "Chapter 2: Building with Fauna + AWS",
-  "three": "Chapter 3: Event sourcing"
+  "one": "Chapter 1: Building a Simple Full Stack Application",
+  "two": "Chapter 2: Database operations"
 }

@@ -1,5 +1,5 @@
 {
-  "app-architecture": "Application architecture",
-  "project-setup": "Project Configuration",
-  "interacting-with-fauna": "Interacting with Fauna"
+  "new-project": "Setting up a new Next.js project",
+  "fauna-config": "Fauna Configuration",
+  "nextjs-code": "Writing the Next.js code"
 }
