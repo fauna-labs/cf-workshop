@@ -13,21 +13,6 @@ export default {
   ),
   head: (
     <>
-      {/* <meta name="msapplication-TileColor" content="#ffffff" />
-      <meta name="theme-color" content="#ffffff" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta httpEquiv="Content-Language" content="en" />
-      <meta name="description" content="Fauna-AWS Workshop" />
-      <meta name="og:description" content="Fauna-AWS Workshop" />
-      <meta name="twitter:card" content="https://workshop-shadid.s3.amazonaws.com/aws-workshop-cover.png" />
-      <meta name="twitter:image:secure_url" content="https://workshop-shadid.s3.amazonaws.com/aws-workshop-cover.png" />
-      <meta name="twitter:title" content="Fauna AWS Workshop ~ Building an event driven app with AWS services and Fauna" />
-      <meta name="twitter:description" content="Fauna-AWS Workshop" />
-      <meta name="twitter:site:domain" content="fauna.com" />
-      <meta name="twitter:url" content="https://fauna.com" />
-      <meta name="og:title" content="Fauna-AWS Workshop" />
-      <meta name="og:image" content="https://workshop-shadid.s3.amazonaws.com/aws-workshop-cover.png" />
-      <meta name="apple-mobile-web-app-title" content="Fauna-AWS Workshop" /> */}
 
 
       <title>Fauna AWS Workshop ~ Building an event-driven app with AWS services and Fauna</title>
@@ -92,6 +77,7 @@ export default {
   nextLinks: true,
   unstable_flexsearch: true,
   feedbackLabels: "Learn More @",
+  projectLink: 'https://github.com/fauna-labs/aws-workshop',
   feedbackLink: () => {
     return (
       <>
@@ -99,7 +85,7 @@ export default {
         <br />
         <a style={{ fontSize: '16px', color: 'rgb(58,26,182)' }} href="https://docs.fauna.com/fauna/current/" target="_blank">📗 Docs</a>
         <br />
-        <a style={{ fontSize: '16px', color: 'rgb(58,26,182)' }} href="https://nextra.vercel.app/feedback" target="_blank">🤖 Sampe Apps</a>
+        <a style={{ fontSize: '16px', color: 'rgb(58,26,182)' }} href="https://github.com/fauna-labs" target="_blank">🤖 Sampe Apps</a>
       </>
     );
   },

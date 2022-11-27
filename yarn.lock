@@ -1508,7 +1508,7 @@
     "@next/swc-win32-ia32-msvc" "12.2.4"
     "@next/swc-win32-x64-msvc" "12.2.4"
 
-"nextra-theme-docs@^2.0.0-beta.6":
+"nextra-theme-docs@^2.0.0-beta.14":
   "integrity" "sha512-bmRC6T6VM8g+4m8tJiHzshxToRL9trI+mZDwE0hQsuVfSFBGeoqTKg4Yq71YrSeEbilU4kXWyuYG292UGZxQ0g=="
   "resolved" "https://registry.npmjs.org/nextra-theme-docs/-/nextra-theme-docs-2.0.0-beta.14.tgz"
   "version" "2.0.0-beta.14"
@@ -1527,7 +1527,7 @@
     "scroll-into-view-if-needed" "^2.2.29"
     "title" "^3.4.2"
 
-"nextra@^2.0.0-beta.6":
+"nextra@^2.0.0-beta.14":
   "integrity" "sha512-htsK4CkHV2TxNXj7UxPfYosi7+QoYSwIpc96KKPMB2P5T+PGUtvS8pfM93GjQmBQDRw4qt8HFJEwQBrcKMnE1A=="
   "resolved" "https://registry.npmjs.org/nextra/-/nextra-2.0.0-beta.14.tgz"
   "version" "2.0.0-beta.14"

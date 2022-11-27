@@ -8,14 +8,14 @@
     "start": "next start",
     "build": "next build"
   },
-  "author": "Shu Ding",
+  "author": "Shadid Haque",
   "license": "MIT",
   "dependencies": {
     "convertkit-react": "^1.5.5",
-    "nextra": "^2.0.0-beta.6",
+    "nextra": "^2.0.0-beta.14",
     "markdown-to-jsx": "^6.11.4",
     "next": "^12.2.0",
-    "nextra-theme-docs": "^2.0.0-beta.6",
+    "nextra-theme-docs": "^2.0.0-beta.14",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "flexsearch": "^0.7.21"
