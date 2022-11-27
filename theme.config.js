@@ -23,14 +23,14 @@ export default {
       <meta property="og:url" content="https://fauna.com"/>
       <meta property="og:title" content="Fauna Cloudflare Workshop ~ Building a globally distributed full stack app with Fauna and Cloudflare Pages Functions"/>
       <meta property="og:description" content="This hands-on guide walks you through building a globally distributed full-stack application with Cloudflare Pages + Fauna"/>
-      <meta property="og:image" content="https://workshop-shadid.s3.amazonaws.com/aws-workshop-cover.png"/>
+      <meta property="og:image" content=""/>
 
       <meta name="twitter:site" content="@fauna" />
       <meta property="twitter:card" content="summary_large_image"/>
       <meta property="twitter:url" content="https://fauna.com"/>
       <meta property="twitter:title" content="Fauna Cloudflare Workshop ~ Building a globally distributed full stack app with Fauna and Cloudflare Pages Functions"/>
       <meta property="twitter:description" content="This hands-on guide walks you through building a globally distributed full-stack application with Cloudflare Pages + Fauna"/>
-      <meta property="twitter:image" content="https://workshop-shadid.s3.amazonaws.com/aws-workshop-cover.png"/>
+      <meta property="twitter:image" content=""/>
 
 
 
