@@ -1,4 +1,5 @@
 import Script from 'next/script'
+import AuthorCard from './components/Authorcard'
 export default {
   github: 'https://github.com/fauna-labs/aws-workshop',
   docsRepositoryBase: 'https://github.com/fauna-labs/aws-workshop',
@@ -72,14 +73,16 @@ export default {
   unstable_flexsearch: true,
   feedbackLabels: "Learn More @",
   projectLink: 'https://github.com/fauna-labs/aws-workshop',
+  floatTOC: true,
   feedbackLink: () => {
     return (
       <>
+        <AuthorCard />
         <a style={{ fontSize: '16px', color: 'rgb(58,26,182)' }} href="https://github.com/fauna-labs" target="_blank">🧪 Fauna Labs</a>
         <br />
         <a style={{ fontSize: '16px', color: 'rgb(58,26,182)' }} href="https://docs.fauna.com/fauna/current/" target="_blank">📗 Docs</a>
         <br />
-        <a style={{ fontSize: '16px', color: 'rgb(58,26,182)' }} href="https://github.com/fauna-labs" target="_blank">🤖 Sampe Apps</a>
+        <a style={{ fontSize: '16px', color: 'rgb(58,26,182)' }} href="https://docs.fauna.com/fauna/current/learn/sample_apps/" target="_blank">🤖 Sampe Apps</a>
       </>
     );
   },
