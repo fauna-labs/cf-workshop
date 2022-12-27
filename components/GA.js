@@ -10,7 +10,7 @@ function GA() {
   return (
     <div className="container">
       <Script
-        src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"
+        src="https://www.googletagmanager.com/gtag/js?id=UA-51914115-2"
         strategy="afterInteractive"
       />
       <Script id="google-analytics" strategy="afterInteractive">
@@ -19,11 +19,12 @@ function GA() {
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
         
-          gtag('config', 'G-28QKLECV0P');
+          gtag('config', 'UA-51914115-2');
         `}
       </Script>
     </div>
   )
 }
+
 
 export default GA
